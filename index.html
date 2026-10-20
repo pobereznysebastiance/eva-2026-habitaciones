@@ -184,10 +184,32 @@
             padding-bottom: 8px;
         }
 
+        .room-title-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .room-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1rem;
             color: #fff;
+        }
+
+        .btn-edit-room {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: color 0.2s;
+        }
+
+        .btn-edit-room:hover {
+            color: var(--accent-cyan);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .room-capacity {
@@ -245,29 +267,29 @@
     </div>
 
     <script>
-        // Distribución original basada en el PDF[cite: 3]
+        // Distribución original basada en el PDF
         const initialDistribution = [
-            { id: 1, cap: 2, students: ["Cochia Lucia", "AQUINO, Damián Exequiel"] },
-            { id: 2, cap: 2, students: ["Couceiro Carlos Adolfo", "Couceiro Manuel"] },
-            { id: 3, cap: 2, students: ["Mariasch, David", "Gómez Codutti Lucas"] },
-            { id: 4, cap: 2, students: ["Gualtieri Fiorella Agostina", "Giuliano Tubiana"] },
-            { id: 5, cap: 2, students: ["Gallardo Lucas Gabriel", "Parra Esteban"] },
-            { id: 6, cap: 2, students: ["Juan Diego Gomez", "Benjamin Rolón"] },
-            { id: 7, cap: 2, students: ["Rigoni Sappa Oriana Aylen", "Silvero Zacarías Maximiliano Hernán"] },
-            { id: 8, cap: 2, students: ["Mateo Pelizardi", "Bárbara Andrea Flores Leliur"] },
-            { id: 9, cap: 2, students: ["Radovancic Mijail lerko", "Montiel FogarThiago Nahuel"] },
-            { id: 10, cap: 2, students: ["Maccarini Renzo", "Lopez Hardy Carlos"] },
-            { id: 11, cap: 2, students: ["Rossi Aaron", "Alegre Lionel Nicolas"] },
-            { id: 12, cap: 3, students: ["Pérez Velazco, Ariadna Carolina", "Zabala Meza Eliana", "Mia Nazaret Reijers"] },
-            { id: 13, cap: 3, students: ["Sosa Fernández Lucía Magalí", "Becerra María Paula", "Bruno Sosa Maia Aylen"] },
-            { id: 14, cap: 3, students: ["Sanchez Ojeda Matías Rogelio", "Nessier Tobias", "VERON ESCOBAR CARLOS DE JESUS"] },
-            { id: 15, cap: 3, students: ["Vicedo Catalina", "Botello Capará Abril Maria", "Romero Delfina"] },
-            { id: 16, cap: 3, students: ["Martinez Quiñones María de los Angeles", "Alvarenga Karen", "Esquivel maria jimena"] },
-            { id: 17, cap: 4, students: ["Acevedo Jose Julian", "Clemente Rolon Joaquin Daniel", "Tomaszuk Matías Alejandro", "PRIETO FERNANDEZ, ENZO GABRIEL"] },
-            { id: 18, cap: 4, students: ["Claudio Ezequiel Martinez Borda", "Livia Acosta José Martín", "Silva Darío", "Godoy Hector Santiago"] },
-            { id: 19, cap: 4, students: ["Díaz Moroni Melanie Nain", "Barrios Servín Gimena Paola", "Martins Delfina", "Vallone Wolfel Agostina"] },
-            { id: 20, cap: 4, students: ["Gimenez Guadalupe", "Margaria Gimena", "Martina Natali Vega", "Margaria Branz María Pilar"] },
-            { id: 21, cap: 4, students: ["De Greef Juan Martín", "Poberezny Sebastián", "Alvarez José", "Di Rado Franco"] }
+            { id: 1, label: "#1", cap: 2, students: ["Cochia Lucia", "AQUINO, Damián Exequiel"] },
+            { id: 2, label: "#2", cap: 2, students: ["Couceiro Carlos Adolfo", "Couceiro Manuel"] },
+            { id: 3, label: "#3", cap: 2, students: ["Mariasch, David", "Gómez Codutti Lucas"] },
+            { id: 4, label: "#4", cap: 2, students: ["Gualtieri Fiorella Agostina", "Giuliano Tubiana"] },
+            { id: 5, label: "#5", cap: 2, students: ["Gallardo Lucas Gabriel", "Parra Esteban"] },
+            { id: 6, label: "#6", cap: 2, students: ["Juan Diego Gomez", "Benjamin Rolón"] },
+            { id: 7, label: "#7", cap: 2, students: ["Rigoni Sappa Oriana Aylen", "Silvero Zacarías Maximiliano Hernán"] },
+            { id: 8, label: "#8", cap: 2, students: ["Mateo Pelizardi", "Bárbara Andrea Flores Leliur"] },
+            { id: 9, label: "#9", cap: 2, students: ["Radovancic Mijail lerko", "Montiel FogarThiago Nahuel"] },
+            { id: 10, label: "#10", cap: 2, students: ["Maccarini Renzo", "Lopez Hardy Carlos"] },
+            { id: 11, label: "#11", cap: 2, students: ["Rossi Aaron", "Alegre Lionel Nicolas"] },
+            { id: 12, label: "#12", cap: 3, students: ["Pérez Velazco, Ariadna Carolina", "Zabala Meza Eliana", "Mia Nazaret Reijers"] },
+            { id: 13, label: "#13", cap: 3, students: ["Sosa Fernández Lucía Magalí", "Becerra María Paula", "Bruno Sosa Maia Aylen"] },
+            { id: 14, label: "#14", cap: 3, students: ["Sanchez Ojeda Matías Rogelio", "Nessier Tobias", "VERON ESCOBAR CARLOS DE JESUS"] },
+            { id: 15, label: "#15", cap: 3, students: ["Vicedo Catalina", "Botello Capará Abril Maria", "Romero Delfina"] },
+            { id: 16, label: "#16", cap: 3, students: ["Martinez Quiñones María de los Angeles", "Alvarenga Karen", "Esquivel maria jimena"] },
+            { id: 17, label: "#17", cap: 4, students: ["Acevedo Jose Julian", "Clemente Rolon Joaquin Daniel", "Tomaszuk Matías Alejandro", "PRIETO FERNANDEZ, ENZO GABRIEL"] },
+            { id: 18, label: "#18", cap: 4, students: ["Claudio Ezequiel Martinez Borda", "Livia Acosta José Martín", "Silva Darío", "Godoy Hector Santiago"] },
+            { id: 19, label: "#19", cap: 4, students: ["Díaz Moroni Melanie Nain", "Barrios Servín Gimena Paola", "Martins Delfina", "Vallone Wolfel Agostina"] },
+            { id: 20, label: "#20", cap: 4, students: ["Gimenez Guadalupe", "Margaria Gimena", "Martina Natali Vega", "Margaria Branz María Pilar"] },
+            { id: 21, label: "#21", cap: 4, students: ["De Greef Juan Martín", "Poberezny Sebastián", "Alvarez José", "Di Rado Franco"] }
         ];
 
         let roomsData = JSON.parse(localStorage.getItem("eva_rooms_2026")) || JSON.parse(JSON.stringify(initialDistribution));
@@ -301,10 +323,14 @@
 
                 const isFull = room.students.length > room.cap;
                 const capBadgeClass = isFull ? 'cap-full' : 'cap-ok';
+                const roomLabel = room.label || `#${room.id}`;
 
                 roomCard.innerHTML = `
                     <div class="room-header">
-                        <span class="room-title">Habitación #${room.id}</span>
+                        <div class="room-title-box">
+                            <span class="room-title">Habitación ${roomLabel}</span>
+                            <button class="btn-edit-room" onclick="editRoomLabel(${room.id})" title="Editar número/nombre de puerta">✏️</button>
+                        </div>
                         <span class="room-capacity ${capBadgeClass}">${room.students.length} / ${room.cap} Cap.</span>
                     </div>
                     <div class="room-slots" id="room-slots-${room.id}"></div>
@@ -319,6 +345,17 @@
             });
 
             saveData();
+        }
+
+        function editRoomLabel(roomId) {
+            const room = roomsData.find(r => r.id === roomId);
+            if (!room) return;
+
+            const newLabel = prompt(`Ingresa el número real de la puerta para esta habitación:`, room.label || `#${room.id}`);
+            if (newLabel !== null && newLabel.trim() !== "") {
+                room.label = newLabel.trim();
+                renderApp();
+            }
         }
 
         function createStudentNode(name, sourceLocation) {
@@ -380,18 +417,24 @@
 
         function moveStudentPrompt(name, currentLoc) {
             let options = "Selecciona el número de habitación a donde mover:\n0 = Lista Sin Asignar / Libres\n";
-            roomsData.forEach(r => options += `#${r.id} (Cap: ${r.students.length}/${r.cap})\n`);
+            roomsData.forEach(r => options += `Habitación ${r.label || '#' + r.id} (Cap: ${r.students.length}/${r.cap})\n`);
 
             const target = prompt(`Mover a ${name}:\n\n` + options);
             if (target === null) return;
 
-            const targetNum = parseInt(target);
-            if (targetNum === 0) {
+            const inputClean = target.trim();
+            if (inputClean === "0") {
                 moveStudentLogic(name, currentLoc, 'unassigned');
-            } else if (roomsData.some(r => r.id === targetNum)) {
-                moveStudentLogic(name, currentLoc, targetNum);
+                return;
+            }
+
+            // Buscar por ID o por Etiqueta/Número
+            const matchedRoom = roomsData.find(r => r.id == inputClean || r.label.toLowerCase() === inputClean.toLowerCase() || r.label.toLowerCase() === `#${inputClean}`.toLowerCase());
+
+            if (matchedRoom) {
+                moveStudentLogic(name, currentLoc, matchedRoom.id);
             } else {
-                alert("Habitación no válida.");
+                alert("Habitación no encontrada.");
             }
         }
 
@@ -414,7 +457,8 @@
         function copyReport() {
             let report = "🏨 *REPORTE DE HABITACIONES - VIAJE EVA 2026*\n\n";
             roomsData.forEach(r => {
-                report += `📌 *Habitación #${r.id}* (${r.students.length}/${r.cap}):\n`;
+                const roomLabel = r.label || `#${r.id}`;
+                report += `📌 *Habitación ${roomLabel}* (${r.students.length}/${r.cap}):\n`;
                 if (r.students.length === 0) report += "   _(Vacía)_\n";
                 r.students.forEach(s => report += `   • ${s}\n`);
                 report += "\n";
